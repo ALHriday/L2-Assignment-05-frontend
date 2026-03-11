@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Navbar1 } from "@/components/navbar1";
+import { EcommerceFooter1 } from "@/components/ecommerce-footer1";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -28,9 +30,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("font-sans", inter.variable)}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased px-4`}
       >
-        {children}
+        <Navbar1 />
+        <div className="min-h-screen">
+          {children}
+        </div>
+        <EcommerceFooter1 />
       </body>
     </html>
   );

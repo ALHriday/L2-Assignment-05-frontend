@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Field, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
+
 type NewsletterData = {
   title?: string;
   description?: string;

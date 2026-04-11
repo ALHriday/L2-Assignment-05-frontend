@@ -1,4 +1,3 @@
-"use client";
 
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
 
@@ -26,6 +25,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { cookies } from "next/headers";
+import LogoutUser from "@/lib/components/logoutUser";
+import Image from "next/image";
+// import { authClient } from "@/app/(Auth)/auth-client";
+import { getSession } from "@/lib/getSession";
+import Link from "next/link";
 
 interface MenuItem {
   title: string;
@@ -54,10 +59,14 @@ interface Navbar1Props {
       title: string;
       url: string;
     };
+    logout: {
+      title: string;
+      url: string;
+    };
   };
 }
 
-const Navbar1 = ({
+const Navbar1 = async ({
   logo = {
     url: "/",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
@@ -84,14 +93,18 @@ const Navbar1 = ({
     },
   ],
   auth = {
-    login: { title: "Login", url: "#" },
-    signup: { title: "Sign up", url: "#" },
+    login: { title: "Login", url: "/login" },
+    signup: { title: "Register", url: "/register" },
+    logout: { title: "logout", url: "/" },
   },
   className,
 }: Navbar1Props) => {
+
+  const { user } = await getSession();
+
   return (
     <section className={cn("py-4", className)}>
-      <div className="container">
+      <div className="container justify-between items-center">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
@@ -114,9 +127,26 @@ const Navbar1 = ({
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" render={<a href={auth.login.url} />} nativeButton={false}>{auth.login.title}</Button>
-            <Button size="sm" render={<a href={auth.signup.url} />} nativeButton={false}>{auth.signup.title}</Button>
+          <div className="flex gap-2 justify-end items-center">
+
+            {user ? <LogoutUser /> :
+              <>
+                <Button size="sm" render={<a href={auth.signup.url} />} nativeButton={false}>{auth.signup.title}</Button>
+                <Button variant="outline" size="sm" render={<a href={auth.login.url} />} nativeButton={false}>{auth.login.title}</Button>
+              </>
+            }
+
+            <div>
+              <Link href={`/profile`}>
+                <img className="rounded-full"
+                  src={user?.image || 'https://img.icons8.com/?size=100&id=z-JBA_KtSkxG&format=png&color=000000'}
+                  alt={user?.name}
+                  width={40}
+                  height={40}
+                  title={user?.name}
+                />
+              </Link>
+            </div>
           </div>
         </nav>
 
@@ -153,8 +183,12 @@ const Navbar1 = ({
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
-                    <Button variant="outline" render={<a href={auth.login.url} />} nativeButton={false}>{auth.login.title}</Button>
-                    <Button render={<a href={auth.signup.url} />} nativeButton={false}>{auth.signup.title}</Button>
+                    {user ? <LogoutUser /> :
+                      <>
+                        <Button variant="outline" render={<a href={auth.login.url} />} nativeButton={false}>{auth.login.title}</Button>
+                        <Button render={<a href={auth.signup.url} />} nativeButton={false}>{auth.signup.title}</Button>
+                      </>
+                    }
                   </div>
                 </div>
               </SheetContent>

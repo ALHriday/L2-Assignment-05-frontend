@@ -1,7 +1,9 @@
+import SellerOrderTable from "@/lib/components/dashboard/SellerOrderTable";
+
 const page = () => {
     return (
         <div>
-            Update Status
+            <SellerOrderTable />
         </div>
     );
 };

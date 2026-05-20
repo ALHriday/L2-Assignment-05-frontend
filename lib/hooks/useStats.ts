@@ -7,7 +7,7 @@ const useStats = () => {
         queryFn: async () => {
             const res = await fetch(`${url}api/stats`, { credentials: "include", cache: "no-store" });
             const data = await res.json();
-            return data?.data;
+            return data?.data ?? [];
         },
     });
     return { stats, refetch, isLoading };

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import useCart from "@/lib/hooks/useCart";
-import { getErrorMessage } from "@/lib/types/types";
+import { getErrorMessage, User } from "@/lib/types/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -17,7 +17,7 @@ type FormValues = {
 
 const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
 
-const Cart = () => {
+const Cart = ({ user }: { user: User }) => {
     const [isLoading, setIsLoading] = useState(false);
     const { cartItems, setCartItems } = useCart();
     const router = useRouter();
@@ -32,7 +32,9 @@ const Cart = () => {
 
         const orderItems = cartItems?.map((item) => { return { medicineId: item.id, quantity: item.quantity } }) || [];
 
-        const orderData = { name, phone, shippingAddress, cashOnDelivery, orderItems };
+        const userId = user?.id;
+
+        const orderData = { name, phone, shippingAddress, cashOnDelivery, orderItems, userId };
 
         try {
             const res = await fetch(`${url}api/orders`, {

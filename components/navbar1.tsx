@@ -26,7 +26,7 @@ import {
 import LogoutUser from "@/lib/components/logoutUser";
 import Image from "next/image";
 import Link from "next/link";
-import { Role, User } from "@/lib/types/types";
+import { User } from "@/lib/types/types";
 
 interface MenuItem {
   title: string;
@@ -111,11 +111,7 @@ const Navbar1 = ({
                 <NavigationMenuList className='flex gap-2'>
                   {menu.map((item) => renderMenuItem(item))}
                 </NavigationMenuList>
-                {userData?.role === Role.ADMIN &&
-                  (<Link className="ml-2 px-4 py-2 bg-white rounded-md hover:bg-gray-100 border text-sm font-medium" href={`/dashboard`}>
-                    <NavigationMenuList>Dashboard</NavigationMenuList>
-                  </Link>)}
-                {userData?.role === Role.SELLER &&
+                {userData?.role &&
                   (<Link className="ml-2 px-4 py-2 bg-white rounded-md hover:bg-gray-100 border text-sm font-medium" href={`/dashboard`}>
                     <NavigationMenuList>Dashboard</NavigationMenuList>
                   </Link>)}

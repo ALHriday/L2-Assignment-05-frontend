@@ -17,7 +17,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
                     <h2 className="text-2xl">Welcome to dashboard</h2>
                 </div>
                 <div className="p-4">
-                    <div className="flex gap-4 justify-start items-center text-slate-50 text-2xl font-bold px-4 py-2 bg-cyan-700 border-2 border-cyan-500 rounded-md">
+                    <div className="flex gap-4 justify-start items-center text-slate-50 text-xl font-bold px-4 py-2 bg-cyan-700 border-2 border-cyan-500 rounded-md">
                         <div className="p-1 rounded-full border-4 border-cyan-300 bg-slate-100 text-center">🙍‍♂️</div>
                         <div className="">{user.role} </div>
                     </div>

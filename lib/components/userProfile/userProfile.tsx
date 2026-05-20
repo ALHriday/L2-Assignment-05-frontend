@@ -96,10 +96,10 @@ const UserProfile = ({ userData }: { userData: UserData }) => {
 
 
                 <div className="flex gap-2 justify-end items-center">
-                    <Button onClick={handleCancel} type="button" className="">
-                        cancel
+                    <Button onClick={handleCancel} type="button" className="border bg-transparent border-cyan-600 hover:border-cyan-700 hover:bg-cyan-600/15 text-black">
+                        Cancel
                     </Button>
-                    <Button disabled={loading ? true : false} type="submit" className={`${loading ? "animate-pulse" : ""}`}>
+                    <Button disabled={loading ? true : false} type="submit" className={`bg-cyan-600 hover:bg-cyan-700  text-white ${loading ? "animate-pulse" : ""}`}>
                         {loading ? 'Saving...' : 'Save'}
                     </Button>
                 </div>

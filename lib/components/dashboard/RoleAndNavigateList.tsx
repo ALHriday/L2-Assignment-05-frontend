@@ -10,6 +10,14 @@ const adminRoutelists = [
         title: "Ⓜ️ Manage users",
         link: "/dashboard/admin/manage-users"
     },
+    {
+        title: "🅾️ All Orders",
+        link: "/dashboard/admin/orders"
+    },
+    {
+        title: "🅾️ My Orders",
+        link: "/dashboard/admin/my-orders"
+    },
 
 ];
 const sellerRoutelists = [
@@ -26,19 +34,23 @@ const sellerRoutelists = [
         link: "/dashboard/seller/create-medicine"
     },
     {
-        title: "📤 Update Medicine",
-        link: "/dashboard/seller/update-medicine"
+        title: "🅾️ Customer Orders",
+        link: "/dashboard/seller/orders"
     },
     {
-        title: "🅾️ Orders",
-        link: "/dashboard/seller/orders"
+        title: "🅾️ My Orders",
+        link: "/dashboard/seller/my-orders"
     },
 
 ];
 const customerRoutelists = [
     {
-        title: "🏡 Statistics",
-        link: "/dashboard"
+        title: "🏡 Home",
+        link: "/"
+    },
+    {
+        title: "🅾️ My Orders",
+        link: "/dashboard/customer/orders"
     },
 ];
 

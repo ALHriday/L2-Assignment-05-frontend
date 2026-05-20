@@ -1,19 +1,23 @@
-import { orderService } from "@/modules/orders/order.service";
-import { useQuery } from "@tanstack/react-query";
+"use client"
 
+import { useQuery } from "@tanstack/react-query";
+import { usePathname } from "next/navigation";
+
+const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
 
 const useOrdersData = () => {
-    const { data } = useQuery({
-        queryKey: ['ordersData'],
+    const pathName = usePathname();
+    const { data: orders, refetch, isLoading } = useQuery({
+        queryKey: ['orders'],
         queryFn: async () => {
-            const data = await orderService.getOrderData();
-            return data?.result;
+            const res = await fetch(`${url}api/orders`, { credentials: "include", cache: "no-store" });
+            const data = await res.json();
+
+            return data?.data;
         },
-        refetchInterval: 3000,
-        staleTime: 2000,
-        refetchOnWindowFocus: true,
+        enabled: pathName.startsWith('/dashboard'),
     });
-    return { data };
+    return { orders, refetch, isLoading };
 };
 
 export default useOrdersData;

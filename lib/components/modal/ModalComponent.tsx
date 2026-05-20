@@ -4,12 +4,14 @@ import Image from "next/image";
 
 type ModalInfoProps = {
     modalTitle: string;
+    modalIcon: string;
+    modalDescription: string;
     isOpen: boolean;
     onClose: () => void;
     onConfirm: () => void;
 }
 
-const ModalComponent = ({ modalTitle, isOpen, onClose, onConfirm }: ModalInfoProps) => {
+const ModalComponent = ({ modalTitle, modalIcon, modalDescription, isOpen, onClose, onConfirm }: ModalInfoProps) => {
 
     if (!isOpen) return null;
 
@@ -18,8 +20,8 @@ const ModalComponent = ({ modalTitle, isOpen, onClose, onConfirm }: ModalInfoPro
             <div className="flex flex-col gap-2 justify-center items-center bg-white p-6 rounded-lg w-[90%] max-w-sm">
                 <div className="flex justify-center items-center w-20 h-20 p-4 bg-red-200 rounded-full">
                     <Image
-                        src={`/delete-icon.png`}
-                        alt="delete-icon"
+                        src={modalIcon}
+                        alt="icon"
                         width={80}
                         height={80}
                     />
@@ -27,7 +29,7 @@ const ModalComponent = ({ modalTitle, isOpen, onClose, onConfirm }: ModalInfoPro
                 </div>
                 <h2>{modalTitle}</h2>
                 <div>
-                    Are you sure want to delete!
+                    {modalDescription}
                 </div>
 
                 <div className="flex gap-4 mt-4">

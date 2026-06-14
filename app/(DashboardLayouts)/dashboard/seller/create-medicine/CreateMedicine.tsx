@@ -7,7 +7,6 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form"
 import toast, { Toaster } from "react-hot-toast";
 
-const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
 
 type FormValues = {
     title: string;
@@ -41,7 +40,7 @@ const CreateMedicine = () => {
         formData.append('categoryId', categoryId);
 
         try {
-            const res = await fetch(`${url}api/seller/medicines`, {
+            const res = await fetch(`/api/seller/medicines`, {
                 method: "POST",
                 body: formData,
                 credentials: 'include',

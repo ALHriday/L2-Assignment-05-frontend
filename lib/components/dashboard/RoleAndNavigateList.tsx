@@ -45,7 +45,7 @@ const sellerRoutelists = [
 ];
 const customerRoutelists = [
     {
-        title: "🏡 Home",
+        title: "🏡 Go Home",
         link: "/"
     },
     {

@@ -1,12 +1,8 @@
 import UserProfile from "@/lib/components/userProfile/userProfile";
-import { getSession } from "@/lib/getSession";
-
-const page = async () => {
-    const session = await getSession();
-    const user = session?.user;
+const page = () => {
     return (
         <div className="flex justify-center items-center p-4 mx-auto">
-            {user && <UserProfile userData={user} />}
+            <UserProfile />
         </div>
     );
 };

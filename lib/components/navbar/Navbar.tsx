@@ -1,14 +1,12 @@
+"use client"
 import { Navbar1 } from "@/components/navbar1";
-import { getSession } from "@/lib/getSession";
 
+export const dynamic = "force-dynamic";
 
-const Navbar = async () => {
-    const session = await getSession();
-    const user = session?.user;
-
+const Navbar = () => {
     return (
         <div className="relative">
-            <Navbar1 userData={user} />
+            <Navbar1 />
         </div>
     );
 };

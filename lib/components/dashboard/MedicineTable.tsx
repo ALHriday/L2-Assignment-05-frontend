@@ -9,7 +9,7 @@ import LoadingComponent from "../LoadingComponent";
 import useUserMedicine from "@/lib/hooks/useUserMedicine";
 import toast, { Toaster } from "react-hot-toast";
 
-const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
+
 
 
 const MedicineTable = () => {
@@ -22,7 +22,7 @@ const MedicineTable = () => {
     const handleUpdate = async (id: string) => {
 
         try {
-            const res = await fetch(`${url}api/seller/medicines/${id}`, {
+            const res = await fetch(`/api/seller/medicines/${id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ stock: updateStock }),
@@ -55,7 +55,7 @@ const MedicineTable = () => {
             return toast.error(`Can't delete medicine!`);
         }
         try {
-            const res = await fetch(`${url}api/seller/medicines/${id}`, {
+            const res = await fetch(`/api/seller/medicines/${id}`, {
                 method: "DELETE",
                 credentials: 'include',
                 cache: 'no-store'

@@ -1,18 +1,17 @@
 import { getSession } from "@/lib/getSession";
-import SellerLayout from "./SellerLayout";
 import { redirect } from "next/navigation";
-
-export const dynamic = "force-dynamic";
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
     const session = await getSession();
-    if (session?.user?.role !== "SELLER") {
+
+    if (session) {
         redirect('/');
     }
+
     return (
-        <SellerLayout>
+        <div>
             {children}
-        </SellerLayout>
+        </div>
     );
 };
 

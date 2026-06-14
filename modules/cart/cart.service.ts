@@ -1,10 +1,10 @@
-const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
+
 
 export const cartService = {
 
     getCartData: async () => {
         try {
-            const res = await fetch(`${url}api/orders`, {
+            const res = await fetch(`/api/orders`, {
                 credentials: "include",
                 cache: 'no-store'
             });

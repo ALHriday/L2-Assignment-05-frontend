@@ -1,10 +1,9 @@
-"use client"
+import DynamicCart from "@/lib/components/cart/DynamicCart";
 
-import Cart from "@/lib/components/cart/Cart";
 const page = () => {
     return (
         <div>
-            <Cart />
+            <DynamicCart />
         </div>
     );
 };

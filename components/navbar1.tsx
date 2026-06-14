@@ -26,7 +26,7 @@ import {
 import LogoutUser from "@/lib/components/logoutUser";
 import Image from "next/image";
 import Link from "next/link";
-import { User } from "@/lib/types/types";
+import useUserSession from "@/lib/hooks/useUserSession";
 
 interface MenuItem {
   title: string;
@@ -60,7 +60,6 @@ interface Navbar1Props {
       url: string;
     };
   };
-  userData: User;
 }
 
 const Navbar1 = ({
@@ -83,8 +82,9 @@ const Navbar1 = ({
     logout: { title: "logout", url: "/" },
   },
   className,
-  userData,
 }: Navbar1Props) => {
+  const { userSession } = useUserSession();
+  const user = userSession;
 
   return (
     <section className={cn("p-4 shadow-sm sticky top-0 bg-slate-50 z-10", className)}>
@@ -111,7 +111,7 @@ const Navbar1 = ({
                 <NavigationMenuList className='flex gap-2'>
                   {menu.map((item) => renderMenuItem(item))}
                 </NavigationMenuList>
-                {userData?.role &&
+                {user &&
                   (<Link className="ml-2 px-4 py-2 bg-white rounded-md hover:bg-gray-100 border text-sm font-medium" href={`/dashboard`}>
                     <NavigationMenuList>Dashboard</NavigationMenuList>
                   </Link>)}
@@ -120,10 +120,10 @@ const Navbar1 = ({
           </div>
 
           <div className="flex gap-2 justify-end items-center">
-            <Link href={`/cart`} className="transition mr-2 px-2 py-1 bg-white rounded-md hover:bg-gray-100 border-2 text-sm font-bold border-gray-500 hover:border-gray-700">
-              <Image src={`/cart.png`} alt="cart-logo" width={24} height={24} />
+            <Link href={`/cart`} className="transition mr-2 px-2 py-1 bg-white rounded-md hover:bg-gray-100 border text-sm font-bold border-gray-500 hover:border-gray-700">
+              <Image src={`/cart.png`} alt="cart-logo" width={20} height={20} />
             </Link>
-            {userData ? <LogoutUser /> :
+            {user ? <LogoutUser /> :
               <>
                 <Button size="sm" render={<a href={auth.signup.url} />} nativeButton={false}>{auth.signup.title}</Button>
                 <Button variant="outline" size="sm" render={<a href={auth.login.url} />} nativeButton={false}>{auth.login.title}</Button>
@@ -131,13 +131,13 @@ const Navbar1 = ({
             }
 
             <div>
-              <Link href={userData ? `/profile` : '/'}>
+              <Link href={user ? `/profile` : '/'}>
                 <Image className="rounded-full h-10 w-10"
-                  src={userData?.image || 'https://img.icons8.com/?size=100&id=z-JBA_KtSkxG&format=png&color=000000'}
-                  alt={userData?.name || 'Guest'}
+                  src={user?.image || 'https://img.icons8.com/?size=100&id=z-JBA_KtSkxG&format=png&color=000000'}
+                  alt={user?.name || 'Guest'}
                   width={40}
                   height={40}
-                  title={userData?.name}
+                  title={user?.name}
                   priority
                 />
               </Link>
@@ -161,8 +161,8 @@ const Navbar1 = ({
             </a>
             <div className="flex gap-4">
 
-              <Link href={`/cart`} className="border-slate-800 border-2 shadow-md rounded-md p-1">
-                <Image src={`/cart.png`} alt="cart-logo" width={24} height={24} />
+              <Link href={`/cart`} className="border-slate-800 flex justify-center items-center border shadow-md rounded-md px-2 py-1">
+                <Image src={`/cart.png`} alt="cart-logo" width={20} height={20} />
               </Link>
 
               <Sheet>
@@ -171,17 +171,17 @@ const Navbar1 = ({
                   <SheetHeader>
                     <SheetTitle className='flex gap-2'>
                       <div className="flex gap-2 font-bold items-center">
-                        <Link href={userData ? `/profile` : '/'}>
+                        <Link href={user ? `/profile` : '/'}>
                           <Image className="rounded-full h-10 w-10"
-                            src={userData?.image || 'https://img.icons8.com/?size=100&id=z-JBA_KtSkxG&format=png&color=000000'}
-                            alt={userData?.name || 'Guest'}
+                            src={user?.image || 'https://img.icons8.com/?size=100&id=z-JBA_KtSkxG&format=png&color=000000'}
+                            alt={user?.name || 'Guest'}
                             width={40}
                             height={40}
                             title={`Click here to update your profile`}
                             priority
                           />
                         </Link>
-                        <h1>{userData?.name ? `Hello, ${userData?.name}.` : 'Guest.'}</h1>
+                        <h1>{user?.name ? `Hello, ${user?.name}.` : 'Guest.'}</h1>
                       </div>
                     </SheetTitle>
                   </SheetHeader>
@@ -190,9 +190,13 @@ const Navbar1 = ({
                       className="flex w-full flex-col gap-4"
                     >
                       {menu.map((item) => renderMobileMenuItem(item))}
+                      {user &&
+                        (<Link className="text-black font-bold" href={`/dashboard`}>
+                          Dashboard
+                        </Link>)}
                     </Accordion>
                     <div className="flex flex-col gap-3">
-                      {userData ? <LogoutUser /> :
+                      {user ? <LogoutUser /> :
                         <>
                           <Button variant="outline" render={<a href={auth.login.url} />} nativeButton={false}>{auth.login.title}</Button>
                           <Button render={<a href={auth.signup.url} />} nativeButton={false}>{auth.signup.title}</Button>

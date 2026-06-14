@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import GoogleLogin from "@/lib/components/googleLogin";
+import useUserSession from "@/lib/hooks/useUserSession";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -43,6 +44,8 @@ const Login1 = ({
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  const { refetch } = useUserSession();
+
   const router = useRouter();
 
   const handleSignInWithEmailAndPass = async (e: React.FormEvent) => {
@@ -53,20 +56,18 @@ const Login1 = ({
         email,
         password
       });
+      if (!data?.user) {
+        return toast.error('Wrong Email or Password!');
+      }
 
       if (!data?.user?.emailVerified) {
         return toast.error('Email not verified!');
       }
-
-      if (!data?.user) {
-        return toast.error('Wrong Email or Password!');
-      }
       if (data.user) {
-        toast.success('Login Successful.');
+        refetch();
         router.push('/');
+        toast.success('Login Successful.');
       }
-
-      router.refresh();
     } catch (err) {
       return err;
     }

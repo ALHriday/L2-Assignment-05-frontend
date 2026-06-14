@@ -1,21 +1,22 @@
-import { getSession } from "@/lib/getSession";
-import { Role } from "@/lib/types/types";
-import { redirect } from "next/navigation";
+import React from 'react';
+import CustomerLayout from './CustomerLayout';
+import { getSession } from '@/lib/getSession';
+import { redirect } from 'next/navigation';
 
+export const dynamic = "force-dynamic";
 
-const CustomerLayout = async ({ children }: { children: React.ReactNode }) => {
+const layout = async ({ children }: { children: React.ReactNode }) => {
     const session = await getSession();
-    const user = session?.user;
-
-    if (user?.role !== Role.CUSTOMER) {
+    if (session?.user?.role !== "CUSTOMER") {
         redirect('/');
     }
-
     return (
         <div>
-            {children}
+            <CustomerLayout>
+                {children}
+            </CustomerLayout>
         </div>
-    )
-}
+    );
+};
 
-export default CustomerLayout;
+export default layout;

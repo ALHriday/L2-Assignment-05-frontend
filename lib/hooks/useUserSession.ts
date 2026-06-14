@@ -1,26 +1,21 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query";
+import { authClient, User } from "../auth-client";
 
 const useUserSession = () => {
 
-    const { data: user, isError, isLoading, error } = useQuery({
-        queryKey: ['userSession'],
+    const { data: userSession, isError, isLoading, error, refetch } = useQuery<User | null>({
+        queryKey: ['session'],
         queryFn: async () => {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL!}/api/auth/get-session`, { credentials: 'include' });
-
-            if (!res.ok) {
-                throw new Error('Failed to fetch userSession');
-            }
-            const data = await res.json();
+            const { data } = await authClient.getSession();
             return data?.user ?? null;
         },
-        staleTime: 1000 * 60 * 5,
+        staleTime: Infinity,
         retry: 1,
         refetchOnWindowFocus: false,
     });
-
-    return { user, isError, isLoading, error };
+    return { userSession, isError, isLoading, error, refetch };
 };
 
 export default useUserSession;

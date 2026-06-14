@@ -7,9 +7,10 @@ export interface UserData {
 export interface User {
     id: string;
     name: string;
-    phone: string;
-    image: string;
-    role: Role;
+    email: string;
+    phone?: string;
+    image?: string | null;
+    role?: Role;
     status: string;
 }
 

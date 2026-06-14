@@ -1,5 +1,5 @@
 
-const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
+
 
 export const medicinesService = {
     getMedicines: async (search: string, m: string, sort: string, categoryId: string, skip: number) => {
@@ -14,7 +14,7 @@ export const medicinesService = {
         const query = params.toString();
 
         try {
-            const res = await fetch(`${url}api/medicines?${query}`);
+            const res = await fetch(`/api/medicines?${query}`);
 
             if (!res.ok) {
                 throw new Error(`HTTP error! status ${res.status}`);
@@ -28,7 +28,7 @@ export const medicinesService = {
     },
     getAllCategories: async () => {
         try {
-            const res = await fetch(`${url}api/categories`);
+            const res = await fetch(`/api/categories`);
             if (!res.ok) {
                 throw new Error(`HTTP error! status ${res.status}`);
             }
@@ -41,7 +41,7 @@ export const medicinesService = {
     },
     getMedicinesCount: async () => {
         try {
-            const res = await fetch(`${url}api/getMedicinesLen`);
+            const res = await fetch(`/api/getMedicinesLen`);
             if (!res.ok) {
                 throw new Error(`HTTP error! status ${res.status}`);
             }

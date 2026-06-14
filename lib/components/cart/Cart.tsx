@@ -16,14 +16,15 @@ type FormValues = {
     cashOnDelivery: boolean;
 }
 
-const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
+
 
 const Cart = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { cartItems, setCartItems } = useCart();
     const router = useRouter();
 
-    const { user } = useUserSession();
+    const { userSession } = useUserSession();
+    const user = userSession;
 
     const subTotal = cartItems?.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -39,7 +40,7 @@ const Cart = () => {
         const orderData = { name, phone, shippingAddress, cashOnDelivery, orderItems, userId };
 
         try {
-            const res = await fetch(`${url}api/orders`, {
+            const res = await fetch(`/api/orders`, {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(orderData),

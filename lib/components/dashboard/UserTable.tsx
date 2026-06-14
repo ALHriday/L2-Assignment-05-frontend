@@ -9,7 +9,7 @@ import { useState } from "react";
 import LoadingComponent from "../LoadingComponent";
 import toast, { Toaster } from "react-hot-toast";
 
-const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
+
 
 const UserTable = () => {
 
@@ -36,7 +36,7 @@ const UserTable = () => {
         }
 
         try {
-            const res = await fetch(`${url}api/admin/users/${userId}`, {
+            const res = await fetch(`/api/admin/users/${userId}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status: userStatus }),

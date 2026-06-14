@@ -1,10 +1,10 @@
-const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
+
 
 export const orderService = {
 
     getOrderData: async () => {
         try {
-            const res = await fetch(`${url}api/orders`, {
+            const res = await fetch(`/api/orders`, {
                 credentials: "include",
                 cache: 'no-store'
             });
@@ -17,7 +17,7 @@ export const orderService = {
     },
     getSellerOrders: async () => {
         try {
-            const res = await fetch(`${url}api/seller/orders`, {
+            const res = await fetch(`/api/seller/orders`, {
                 credentials: "include",
                 cache: 'no-store'
             });

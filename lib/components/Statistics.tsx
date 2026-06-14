@@ -11,6 +11,7 @@ import {
     Title,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import useStats from '../hooks/useStats';
 
 ChartJS.register(
     LineElement,
@@ -22,22 +23,16 @@ ChartJS.register(
     Title
 );
 
-type Stats = {
-    totalRevenue: number;
-    totalOrders: number;
-    totalUsers: number;
-    totalMedicines: number;
-}
-
-
-const Statistics = ({ stats }: { stats: Stats }) => {
+const Statistics = () => {
+    const { stats } = useStats();
+    const revenue = stats?.totalRevenue;
 
     const data = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [
             {
                 label: 'Monthly Revenue',
-                data: [stats.totalRevenue, , stats.totalRevenue / 2, stats.totalRevenue / 3, stats.totalRevenue / 4, stats.totalRevenue / 5, stats.totalRevenue / 6, stats.totalRevenue, stats.totalRevenue / 7, stats.totalRevenue / 8, stats.totalRevenue / 9, stats.totalRevenue / 10, stats.totalRevenue / 11, stats.totalRevenue / 12],
+                data: [revenue, , revenue / 2, revenue / 3, revenue / 4, revenue / 5, revenue / 6, revenue, revenue / 7, revenue / 8, revenue / 9, revenue / 10, revenue / 11, revenue / 12],
                 borderColor: 'rgba(75,192,192,1)',
                 tension: 0.4,
                 fill: false,

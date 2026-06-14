@@ -3,17 +3,20 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { UserData } from "@/lib/types/types";
+import { User } from "@/lib/auth-client";
+import useUserSession from "@/lib/hooks/useUserSession";
 import { userService } from "@/modules/users/users.service";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
+const UserProfile = () => {
 
+    const { userSession } = useUserSession();
+    const user = userSession as User;
 
-const UserProfile = ({ userData }: { userData: UserData }) => {
-    const [name, setName] = useState<string>(userData?.name || '');
-    const [phone, setPhone] = useState<string>(userData?.phone || '');
+    const [name, setName] = useState<string>(user?.name ?? '');
+    const [phone, setPhone] = useState<string>(user?.phone ?? '');
     const [image, setImage] = useState<File | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 

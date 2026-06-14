@@ -17,7 +17,7 @@ type SellerOrder = {
     updateAt: Date;
 }
 
-const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
+
 
 
 const SellerOrderTable = () => {
@@ -44,7 +44,7 @@ const SellerOrderTable = () => {
             return toast.error(`Can't Update Order Status!`);
         }
         try {
-            const res = await fetch(`${url}api/seller/orders/${orderId}`, {
+            const res = await fetch(`/api/seller/orders/${orderId}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status: orderStatus }),

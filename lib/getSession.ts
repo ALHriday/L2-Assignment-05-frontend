@@ -1,14 +1,15 @@
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { authClient } from "./auth-client";
 
 export const getSession = async () => {
-    const cookieStore = await cookies();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL!}/api/auth/get-session`, { headers: { Cookie: cookieStore.toString() }, cache: "no-store", credentials: 'include' });
+    try {
+        const cookieStore = await cookies();
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL!}/api/auth/get-session`, { method: "GET", headers: { Cookie: cookieStore.toString() }, cache: "no-store" });
 
-    if (!res.ok) {
-        await authClient.signOut();
-        redirect('/login');
+        if (!res.ok) {
+            return null;
+        }
+        return await res.json();
+    } catch {
+        return null;
     }
-    return await res.json();
-}
+};

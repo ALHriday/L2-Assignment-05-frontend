@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL!}/api/medicines/${id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL!}/api/medicines/${id}`, { cache: 'no-store' });
     if (res.status === 404) {
         notFound();
     }

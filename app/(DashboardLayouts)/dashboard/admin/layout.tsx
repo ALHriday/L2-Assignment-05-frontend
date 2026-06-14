@@ -1,21 +1,21 @@
-import { getSession } from "@/lib/getSession";
-import { Role } from "@/lib/types/types";
-import { redirect } from "next/navigation";
+import { getSession } from '@/lib/getSession';
+import AdminLayout from './AdminLayout';
+import { redirect } from 'next/navigation';
 
+export const dynamic = "force-dynamic";
 
-const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
+const layout = async ({ children }: { children: React.ReactNode }) => {
     const session = await getSession();
-    const user = session?.user;
 
-    if (user?.role !== Role.ADMIN) {
+    if (session?.user?.role !== "ADMIN") {
         redirect('/');
     }
 
     return (
-        <div>
+        <AdminLayout>
             {children}
-        </div>
-    )
-}
+        </AdminLayout>
+    );
+};
 
-export default AdminLayout;
+export default layout;

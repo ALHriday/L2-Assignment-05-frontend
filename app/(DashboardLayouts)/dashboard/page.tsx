@@ -1,18 +1,12 @@
 import StatsCard from "@/lib/components/StatsCard";
-import { getSession } from "@/lib/getSession";
-import { redirect } from "next/navigation";
 
-const page = async () => {
-    const session = await getSession();
-    const user = session?.user;
+export const dynamic = 'force-dynamic';
 
-    if (user?.role === "CUSTOMER") {
-        redirect('/dashboard/customer/orders');
-    }
+const page = () => {
 
     return (
         <div>
-            <StatsCard userRole={user.role} />
+            <StatsCard />
         </div>
     );
 };

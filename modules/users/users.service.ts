@@ -1,10 +1,10 @@
 
-const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
+
 
 export const userService = {
     updateUserProfile: async (data: FormData) => {
         try {
-            const res = await fetch(`${url}api/users/profile`, {
+            const res = await fetch(`/api/users/profile`, {
                 method: "PUT",
                 credentials: "include",
                 body: data
@@ -21,7 +21,7 @@ export const userService = {
     },
     registerUser: async (data: FormData) => {
         try {
-            const res = await fetch(`${url}api/auth/signup`, {
+            const res = await fetch(`/api/auth/signup`, {
                 method: "POST",
                 body: data
             });

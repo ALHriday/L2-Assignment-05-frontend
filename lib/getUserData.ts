@@ -1,11 +1,11 @@
 import { cookies } from "next/headers";
 
-const url = new URL(process.env.NEXT_PUBLIC_API_URL!).toString();
+
 
 const getUserData = async () => {
     const cookieStore = await cookies();
     try {
-        const res = await fetch(`${url}api/admin/users`, {
+        const res = await fetch(`/api/admin/users`, {
             method: "GET",
             headers: { Cookie: cookieStore.toString() },
             cache: 'no-store'

@@ -75,6 +75,10 @@ const Navbar1 = ({
       title: "Medicines",
       url: "/medicines",
     },
+    {
+      title: "About",
+      url: "/about",
+    },
   ],
   auth = {
     login: { title: "Login", url: "/login" },

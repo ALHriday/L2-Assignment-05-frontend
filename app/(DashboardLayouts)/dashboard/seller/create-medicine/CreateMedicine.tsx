@@ -85,7 +85,7 @@ const CreateMedicine = () => {
                     <div className="flex flex-col md:flex-row gap-2">
                         <div className="flex flex-col gap-3 md:w-1/2">
                             <label className="flex flex-col gap-2 text-md font-semibold ">Image:</label>
-                            <input className="p-2 text-md border rounded-md bg-gray-200/35" type="file" {...register("image", { required: true })} required />
+                            <input className="p-2 text-md border rounded-md bg-gray-200/35" type="file" {...register("image")} />
                         </div>
                         <div className="flex flex-col gap-3 md:w-1/2">
                             <label className="flex flex-col gap-2 text-md font-semibold ">Category Name:</label>

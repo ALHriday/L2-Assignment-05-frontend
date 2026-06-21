@@ -7,7 +7,6 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -16,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export const title = "Four Field Form";
 
@@ -31,6 +31,7 @@ const formSchema = z.object({
 });
 
 const Register = () => {
+  const [isLoading, serIsLoading] = useState(false);
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,26 +44,29 @@ const Register = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-
+    serIsLoading(true);
     const fullName = `${values.firstName.trim()} ${values.lastName.trim()}`;
     const email = values.email.trim();
     const password = values.password.trim();
 
     try {
-      const { data } = await authClient.signUp.email({
+      const { error, data } = await authClient.signUp.email({
         name: fullName,
         email,
         password
       });
 
-      if (!data?.user) {
+      if (error || !data?.user) {
         return toast.error('Invalid Credentials!');
       }
-      toast.success('Account Register Successful.');
-      router.push('/login');
+
+      toast.success('Account register successful.');
       router.refresh();
+      router.push('/login');
     } catch (err) {
       return err;
+    } finally {
+      serIsLoading(false);
     }
   }
 
@@ -83,7 +87,7 @@ const Register = () => {
                     id={field.name}
                     aria-invalid={fieldState.invalid}
                     className="bg-background"
-                    placeholder="John"
+                    placeholder="first name"
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
@@ -102,7 +106,7 @@ const Register = () => {
                     id={field.name}
                     aria-invalid={fieldState.invalid}
                     className="bg-background"
-                    placeholder="Doe"
+                    placeholder="last name"
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
@@ -122,12 +126,9 @@ const Register = () => {
                   id={field.name}
                   aria-invalid={fieldState.invalid}
                   className="bg-background"
-                  placeholder="john@example.com"
+                  placeholder="Email"
                   type="email"
                 />
-                <FieldDescription>
-                  {`We'll use this to contact you.`}
-                </FieldDescription>
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
                 )}
@@ -156,7 +157,7 @@ const Register = () => {
           />
         </FieldGroup>
         <div className="flex justify-end items-center w-full mt-4">
-          <Button className="w-full" type="submit">Create an Account</Button>
+          <Button disabled={isLoading} className="w-full" type="submit">{isLoading ? `Creating an account...` : `Create an account`}</Button>
         </div>
       </form>
     </div>

@@ -92,7 +92,6 @@ const UserProfile = () => {
                         type="file"
                         placeholder="Enter Your Picture"
                         className="text-sm"
-                        required
                         onChange={(e) => setImage(e.target.files?.[0] || null)}
                     />
                 </div>

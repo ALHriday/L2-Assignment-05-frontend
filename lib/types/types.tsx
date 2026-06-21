@@ -79,6 +79,12 @@ export enum Role {
     CUSTOMER = "CUSTOMER",
 }
 
+export type SortField = 'price' | 'manufacturer' | 'createdAt';
+export type SortOrder = 'asc' | 'desc';
+
+export interface Manufacturer {
+    manufacturer: string;
+}
 
 export const getErrorMessage = (error: unknown) => {
     if (error instanceof Error) {

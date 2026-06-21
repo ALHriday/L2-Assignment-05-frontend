@@ -2,12 +2,14 @@
 
 
 export const medicinesService = {
-    getMedicines: async (search: string, m: string, sort: string, categoryId: string, skip: number) => {
+    getMedicines: async (search: string, m: string, sortField: string, sortOrder: string, categoryId: string, skip: number) => {
+
         const params = new URLSearchParams();
 
         if (search) params.append("search", search);
         if (m) params.append("m", m);
-        if (sort) params.append("sort", sort);
+        if (sortField) params.append("sortField", sortField);
+        if (sortOrder) params.append("sortOrder", sortOrder);
         if (categoryId) params.append("categoryId", categoryId);
         if (skip) params.append("skip", skip.toString());
 

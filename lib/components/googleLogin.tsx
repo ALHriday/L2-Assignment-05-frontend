@@ -11,13 +11,15 @@ type GoogleText = {
 const googleLogin = (text: GoogleText) => {
     const handleSignInWithGoogle = async () => {
         try {
-            await authClient.signIn.social({
+            const { error, data } = await authClient.signIn.social({
                 provider: "google",
                 callbackURL: `${process.env.NEXT_PUBLIC_APP_URL!}`,
             });
-        } catch (err) {
-            toast.error("Sign In unsuccessful. Try again later!");
-            console.error(err);
+            if (error || !data) {
+                toast.error('Something went wrong! Please try again later');
+            }
+        } catch {
+            toast.error("Sign In unsuccessful! Please try again later.");
         };
     }
     return (

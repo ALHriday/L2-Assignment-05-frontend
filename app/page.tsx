@@ -1,3 +1,4 @@
+import AboutMediStore from "@/lib/components/aboutMediStore/AboutMediStore";
 import Medicines from "@/lib/components/medicines/medicines";
 import WhyChooseUs from "@/lib/components/whyChooseUs/WhyChooseUs";
 
@@ -12,6 +13,9 @@ export default function Home() {
           <p className="text-md md:text-xl text-gray-600 py-1 px-2 rounded-md">Discover practical health tips, medicine guides, and wellness advice to help you make better decisions every day.</p>
         </section>
         <WhyChooseUs />
+        <div className="mt-4">
+          <AboutMediStore />
+        </div>
       </main>
     </div>
   );

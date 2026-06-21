@@ -44,7 +44,7 @@ const Login1 = ({
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const { refetch } = useUserSession();
+  const { isLoading, refetch } = useUserSession();
 
   const router = useRouter();
 
@@ -52,24 +52,24 @@ const Login1 = ({
     e.preventDefault();
 
     try {
-      const { data } = await authClient.signIn.email({
+      const { data, error } = await authClient.signIn.email({
         email,
         password
       });
-      if (!data?.user) {
+
+      if (error || !data?.user) {
         return toast.error('Wrong Email or Password!');
       }
 
-      if (!data?.user?.emailVerified) {
-        return toast.error('Email not verified!');
+      if (!data?.user.emailVerified) {
+        return toast.error('Email not verified! Please check your inbox.');
       }
-      if (data.user) {
-        refetch();
-        router.push('/');
-        toast.success('Login Successful.');
-      }
-    } catch (err) {
-      return err;
+
+      toast.success('Login Successful.');
+      refetch();
+      router.push('/');
+    } catch {
+      toast.error('Something went wrong! Please try again later.');
     }
   }
 
@@ -113,7 +113,7 @@ const Login1 = ({
               href={signupUrl}
               className="font-medium text-primary hover:underline"
             >
-              Sign up
+              {isLoading ? `Signin up...` : `Sign up`}
             </Link>
           </div>
         </div>

@@ -97,10 +97,10 @@ const Cart = () => {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center gap-8 sm:p-4 mx-auto">
+        <div className="flex flex-col justify-center items-center gap-8 p-2 sm:p-4 mx-auto">
             <div className="w-full md:w-9/12 lg:h-5/12 md:p-4 border-2 bg-gray-50 rounded-md flex flex-col">
                 <div className="flex justify-between items-center gap-4 py-2 border-b-2 bg-orange-200 px-2">
-                    <h1 className="font-bold text-2xl p-2">Your Cart Items</h1>
+                    <h1 className="font-bold text-xl md:text-2xl p-2">Your Cart Items</h1>
                     <div>
                         {cartItems?.length ?
                             <Button className={`bg-red-500 cursor-pointer`} onClick={handleClearAll}>Clear All</Button>
@@ -110,19 +110,19 @@ const Cart = () => {
                 <table className="border-2">
                     <thead className="border-2">
                         <tr className="flex justify-between items-center text-center bg-orange-100 border-collapse">
-                            <th className="p-1 text-start w-2/4">Title</th>
-                            <th className="p-1 w-1/4"> Price & Quantity</th>
-                            <th className="p-1text-end pr-8 w-1/4">Amount</th>
+                            <th className="text-sm md:text-md p-1 text-start w-2/4">Title</th>
+                            <th className="text-sm md:text-md p-1 w-1/4"> Price & Quantity</th>
+                            <th className="text-sm md:text-md p-1 text-end pr-8 w-1/4">Amount</th>
                         </tr>
                     </thead>
                     {cartItems && cartItems?.map(item => <tbody className="border-2" key={item.id}>
                         <tr className="flex justify-between items-center border-collapse border h-13">
-                            <td className="w-2/4 h-full p-1">{item.title}</td>
-                            <td className="w-1/4 h-full p-1  flex justify-center items-center gp-1 md:gap-4">
-                                <span className="px-2">${item.price} x {item.quantity}</span>
+                            <td className="text-sm md:text-md w-2/4 h-full p-1 flex items-center">{item.title}</td>
+                            <td className="text-sm md:text-md w-1/4 h-full p-1  flex justify-center items-center gp-1 md:gap-4">
+                                <span className="text-sm md:text-md px-2">${item.price} x {item.quantity}</span>
                                 <span className="flex justify-start items-center gap-1">
-                                    <Button className="cursor-pointer" onClick={() => handleIncrementQuantity(item.id)}>+</Button>
-                                    <Button className="cursor-pointer" onClick={() => handleDecrementQuantity(item.id)}>-</Button>
+                                    <Button className="w-6 h-6 md:w-8 md:h-8 text-sm md:text-md cursor-pointer" onClick={() => handleIncrementQuantity(item.id)}>+</Button>
+                                    <Button className="w-6 h-6 md:w-8 md:h-8 text-sm md:text-md cursor-pointer" onClick={() => handleDecrementQuantity(item.id)}>-</Button>
                                 </span>
                             </td>
                             <td className="w-1/4 h-full p-1 flex justify-end items-center gap-4">
@@ -146,7 +146,7 @@ const Cart = () => {
                         <tr className="border-2 flex justify-between items-center font-bold py-2 bg-gray-100 pr-8 md:pr-12">
                             <td></td>
                             <td></td>
-                            <td>Total Amount:  ${subTotal}</td>
+                            <td className="text-sm md:text-md">Total Amount:  ${subTotal}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -159,18 +159,18 @@ const Cart = () => {
                         <div className="flex flex-col md:flex-row gap-2">
                             <div className="flex flex-col gap-3 md:w-1/2">
                                 <label className="flex flex-col gap-2 text-md font-bold ">Name:</label>
-                                <input className="p-2 text-md border" {...register("name", { required: true })} placeholder="Enter your name" required />
+                                <input className="p-2 text-md border rounded-md" {...register("name", { required: true })} placeholder="Enter your name" required />
                             </div>
                             <div className="flex flex-col gap-3 md:w-1/2">
                                 <label className="flex flex-col gap-2 text-md font-bold ">Phone:</label>
-                                <input className="p-2 text-md border" {...register("phone", { required: true, minLength: 11, maxLength: 11 })} placeholder="Enter your phone number" required />
+                                <input className="p-2 text-md border rounded-md" {...register("phone", { required: true, minLength: 11, maxLength: 11 })} placeholder="Enter your phone number" required />
                                 {errors.phone && <p className="text-red-500 text-sm">Phone Number Must be 11 Digits!</p>}
                             </div>
                         </div>
                         <div className="flex flex-col gap-4">
                             <div className="flex flex-col gap-4">
                                 <label className="flex flex-col gap-2 text-md font-bold ">Address:</label>
-                                <textarea className="p-2 text-md border min-h-16 max-h-30" {...register("shippingAddress", { required: true })} placeholder="Example: Village, P:O, P:S, District." required />
+                                <textarea className="p-2 text-md border min-h-16 max-h-30 rounded-md" {...register("shippingAddress", { required: true })} placeholder="Example: Village, P:O, P:S, District." required />
                             </div>
                             <div className="flex gap-2 items-center">
                                 <input type="checkbox" className="p-2 text-xl font-bold border w-5 h-5 rounded-md" {...register("cashOnDelivery", { required: true })} required />

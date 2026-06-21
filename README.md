@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏥 MediStore - Online Pharmacy Management System
 
-## Getting Started
+MediStore is a modern full-stack pharmacy management platform designed to simplify medicine sales, order management, and user administration. The application supports multiple user roles including Admin, Seller, and Customer with dedicated dashboards and role-based access control.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Live Demo
+- Frontend: https://medistore-frontend-livid.vercel.app  
+- Backend: https://medistore-server2.vercel.app  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# 📋 Project Overview
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+MediStore enables customers to browse medicines, place orders, and track purchases while allowing sellers to manage inventory and orders. Administrators have complete control over users, platform statistics, and overall system management.
 
-## Learn More
+## ✨ Features
 
-To learn more about Next.js, take a look at the following resources:
+### 👤 User Features
+- Browse all available medicines
+- Search and filter medicines
+- Add medicines to cart
+- Place orders
+- User authentication (Login/Register)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🛠️ Admin Features
+- Statistics
+- Manage users
+- View all order history
+  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🏪 Seller Features
+- Statistics
+- Add new medicines
+- Update medicine details
+- Delete medicines
+- Manage orders
 
-## Deploy on Vercel
+### 👤 Customer Features
+- View order history
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🔐 Authentication
+- Secure login & registration system
+- Protected routes
+- BetterAuth authentication
+
+### 📦 Order System
+- Cart management
+- Order placement
+- Order status tracking
+
+---
+
+## 🧑‍💻 Tech Stack
+
+### Frontend:
+- Next.js
+- Tailwind CSS
+- Shadcn
+- React hook form
+- Tanstack Query
+
+### Backend:
+- Node.js
+- Express.js
+- Prisma
+- Postgres
+- BetterAuth authentication
+
+---
+
+## 👨‍💻 Author
+### Alauddin Hriday
+### Full Stack Developer
+
+Github: https://github.com/ALHriday
+LinkedIn: https://bd.linkedin.com/in/alauddinhriday
+
+
+⭐ If you like this project, consider giving it a star on GitHub!

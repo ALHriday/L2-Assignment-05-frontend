@@ -26,15 +26,18 @@ const UserProfile = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('phone', phone);
+            // const formData = new FormData();
+            // formData.append('name', name);
+            // formData.append('phone', phone);
 
-            if (image) {
-                formData.append('image', image);
-            }
+            // if (image) {
+            //     formData.append('image', image);
+            // }
+            const img = '';
 
-            const result = await userService.updateUserProfile(formData);
+            const payload = { name, phone, image: img };
+
+            const result = await userService.updateUserProfile(payload);
 
             if (result.result.success) {
                 toast.success('Your Profile Updated Successful.');

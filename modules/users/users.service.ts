@@ -1,13 +1,12 @@
 
-
-
 export const userService = {
-    updateUserProfile: async (data: FormData) => {
+    updateUserProfile: async (data: { name: string, phone: string, image?: string }) => {
         try {
             const res = await fetch(`/api/users/profile`, {
                 method: "PUT",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify(data),
                 credentials: "include",
-                body: data
             });
             if (!res.ok) {
                 throw new Error('Internal Server Error!');
@@ -16,7 +15,7 @@ export const userService = {
 
             return { result: result, error: null };
         } catch {
-            return { result: null, err: { message: 'something went wrong!' } }
+            return { result: null, err: { message: 'something went wrong!' } };
         }
     },
     registerUser: async (data: FormData) => {

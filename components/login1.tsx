@@ -61,7 +61,7 @@ const Login1 = ({
         return toast.error('Wrong Email or Password!');
       }
 
-      if (!data?.user.emailVerified) {
+      if (!data?.user?.emailVerified) {
         return toast.error('Email not verified! Please check your inbox.');
       }
 

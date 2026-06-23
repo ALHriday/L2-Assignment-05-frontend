@@ -14,7 +14,7 @@ const useCustomerOrder = () => {
 
             return data?.data;
         },
-        enabled: pathName.startsWith('/dashboard/customer'),
+        enabled: pathName.startsWith('/dashboard'),
     });
     return { customerOrders, refetch, isLoading };
 };

@@ -8,7 +8,15 @@ MediStore is a modern full-stack pharmacy management platform designed to simpli
 - Frontend: https://medistore-frontend-livid.vercel.app  
 - Backend: https://medistore-server2.vercel.app  
 
+### User Credentials
+Admin Email: karim@gmail.com
+Admin Password: 12345678
+
+Seller Email: habib@gmail.com
+Seller Password: 12345678
+
 ---
+
 
 # 📋 Project Overview
 
@@ -72,9 +80,9 @@ MediStore enables customers to browse medicines, place orders, and track purchas
 
 ## 👨‍💻 Author
 ### Alauddin Hriday
-### Full Stack Developer
+#### Full Stack Developer
 
-Github: https://github.com/ALHriday
+Github: https://github.com/ALHriday <br/>
 LinkedIn: https://bd.linkedin.com/in/alauddinhriday
 
 

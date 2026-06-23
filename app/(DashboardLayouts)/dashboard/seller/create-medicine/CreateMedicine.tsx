@@ -29,30 +29,35 @@ const CreateMedicine = () => {
         setIsLoading(true);
         const { title, image, description, manufacturer, price, stock, categoryId } = data || {};
 
-        const formData = new FormData();
+        // const formData = new FormData();
 
-        formData.append('title', title);
-        formData.append('image', image[0]);
-        formData.append('description', description);
-        formData.append('manufacturer', manufacturer);
-        formData.append('price', String(price));
-        formData.append('stock', String(stock));
-        formData.append('categoryId', categoryId);
+        // formData.append('title', title);
+        // formData.append('image', image[0]);
+        // formData.append('description', description);
+        // formData.append('manufacturer', manufacturer);
+        // formData.append('price', String(price));
+        // formData.append('stock', String(stock));
+        // formData.append('categoryId', categoryId);
+
+        const payload = { title, image, stock, price, manufacturer, description, categoryId };
 
         try {
             const res = await fetch(`/api/seller/medicines`, {
                 method: "POST",
-                body: formData,
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify(payload),
                 credentials: 'include',
-            })
-            const medicine = await res.json();
+            });
 
-            if (medicine) {
+            if (res.ok) {
+                await res.json();
                 toast.success('Medicine Created successful.');
                 reset();
+            } else {
+                toast.error("Failed to create medicine!");
             }
-        } catch (error) {
-            console.error(error);
+        } catch {
+            toast.error("Something went wrong!");
         } finally {
             setIsLoading(false);
         }
@@ -109,7 +114,7 @@ const CreateMedicine = () => {
 
                 <div className="flex justify-end gap-2">
                     <Button onClick={handleCancel} className={'my-4 bg-cyan-700 text-white'}>Cancel</Button>
-                    <Button disabled={isLoading ? true : false} type="submit" className={` ${isLoading && 'animate-pulse'} my-4 bg-cyan-700 text-white`}>{isLoading ? "Creating Medicine..." : "Create Medicine"}</Button>
+                    <Button disabled={isLoading} type="submit" className={` ${isLoading && 'animate-pulse'} my-4 bg-cyan-700 text-white`}>{isLoading ? "Creating Medicine..." : "Create Medicine"}</Button>
                 </div>
             </form>
         </div>

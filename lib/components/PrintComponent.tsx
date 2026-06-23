@@ -11,7 +11,7 @@ const PrintComponent = ({ order }: { order: Order }) => {
 
     return (
         <div>
-            <div ref={contentRef} className="p-8">
+            <div ref={contentRef} className="p-4 md:p-8">
                 <div className="p-4 md:w-10/12 mx-auto border-2 my-6 rounded-md">
                     <div>
                         <h1 className="text-center text-2xl font-semibold mt-2">Invoice</h1>
@@ -28,11 +28,11 @@ const PrintComponent = ({ order }: { order: Order }) => {
 
                         </div>
                         <div className="flex flex-col gap-1 text-md">
-                            <h1 className="">Name: {order?.name.toUpperCase() || ''}</h1>
-                            <h1 className="">Phone: {order?.phone}</h1>
-                            <h1 className="">Address: {order?.shippingAddress}</h1>
-                            <h1 className="">Created Date: {new Date(order?.createdAt).toLocaleDateString() || ''}</h1>
-                            <h1>Invoice_Id: {order?.id}</h1>
+                            <h1>Invoice_Id:{order?.id && ` INV-${order?.id.slice(-5).toUpperCase()}`}</h1>
+                            <h1>Name: {order?.name.toUpperCase() || ''}</h1>
+                            <h1>Phone: {order?.phone}</h1>
+                            <h1>Address: {order?.shippingAddress}</h1>
+                            <h1>Created Date: {new Date(order?.createdAt).toLocaleDateString() || ''}</h1>
                         </div>
 
                         <div>

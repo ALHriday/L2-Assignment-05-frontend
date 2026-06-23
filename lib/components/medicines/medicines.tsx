@@ -74,12 +74,12 @@ const Medicines = () => {
                         />
                     </div>
 
-                    <div className="col-span-3 flex gap-2 items-center relative lg:p-4">
-                        <div className="flex gap-2 items-center select-none cursor-pointer font-bold" onClick={() => setIsOpen(!isOpen)}>
-                            <span>Sort:</span> <LucideSettings2 /></div>
+                    <div className="col-span-3 flex gap-2 justify-center items-center relative">
+                        <div className="flex gap-2 justify-center items-center select-none cursor-pointer font-bold text-center" onClick={() => setIsOpen(!isOpen)}>
+                            <span>Sort:</span> <Button><LucideSettings2 /></Button></div>
                         <div className="relative">
 
-                            {isOpen && <div className="w-72 p-3 flex flex-col gap-3 absolute top-6 right-0 z-50 bg-white rounded-md shadow-md border">
+                            {isOpen && <div className="w-72 p-3 flex flex-col gap-3 absolute top-8 right-0 z-50 bg-white rounded-md shadow-md border">
                                 <div className="flex gap-2">
                                     <label className="text-gray-600">Sort By: </label>
                                     <select className="p-2 border w-full rounded-md" onChange={(e) => setSortField(e.target.value as SortField)} name="Sort" id="" value={sortField}>
@@ -168,11 +168,14 @@ const Medicines = () => {
                             </div>)
                         }
                     </div>
+
+                    <div></div>
+
                     {isLoading &&
                         <div className="flex justify-center items-center md:justify-start flex-wrap gap-4 mb-6">
                             {Array.from({ length: 10 }).map((_, i) =>
-                                <div key={i} className="w-44 md:w-56 p-2 rounded-md gap-2 shadow-md flex flex-col justify-between animate-pulse">
-                                    <div className="w-36 md:w-52 h-20 md:h-32 rounded-md object-cover bg-slate-300 flex justify-center items-center">
+                                <div key={i} className="w-36 md:w-56 rounded-md gap-1 md:gap-2 shadow-md flex flex-col justify-between p-1 animate-pulse">
+                                    <div className="w-36 md:w-52 h-20 md:h-36 rounded-md object-cover bg-slate-300 flex justify-center items-center">
                                         < GrImage className="text-2xl text-gray-500"></GrImage>
                                     </div>
 

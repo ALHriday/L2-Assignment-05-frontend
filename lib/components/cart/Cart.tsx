@@ -181,7 +181,7 @@ const Cart = () => {
 
                     <div className="flex justify-end gap-2">
                         <Button onClick={handleCancel} className={'my-4'}>Cancel</Button>
-                        <Button disabled={cartItems?.length ? false : true} type="submit" className={`${isLoading && 'animate-pulse'} my-4`}>{isLoading ? "Placing Order..." : 'Place Order'}</Button>
+                        <Button disabled={!cartItems?.length} type="submit" className={`${isLoading && 'animate-pulse'} my-4`}>{isLoading ? "Placing Order..." : 'Place Order'}</Button>
                     </div>
                 </form>
             </div>

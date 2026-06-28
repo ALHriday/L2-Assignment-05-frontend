@@ -4,7 +4,7 @@ const AboutMediStore = () => {
     return (
         <div className='p-4 flex flex-col gap-4 text-md md:text-xl text-gray-600 mb-6'>
             <div>
-                At <strong>MediTrust</strong>, we provide a wide range of genuine medicines, healthcare essentials, and wellness products sourced from authorized suppliers and trusted manufacturers. We are committed to ensuring customer safety, product authenticity, and excellent service.
+                At <strong>MediStore</strong>, we provide a wide range of genuine medicines, healthcare essentials, and wellness products sourced from authorized suppliers and trusted manufacturers. We are committed to ensuring customer safety, product authenticity, and excellent service.
             </div>
             <div>
                 <strong>Our Mission</strong>
@@ -26,7 +26,7 @@ const AboutMediStore = () => {
                 </ul>
             </div>
             <div>
-                <strong>Why Choose MediTrust? </strong><br />
+                <strong>Why Choose MediStore? </strong><br />
 
                 ✅ Genuine and quality-assured products<br />
                 ✅ User-friendly online platform<br />
@@ -39,9 +39,9 @@ const AboutMediStore = () => {
 
                 To become one of the most trusted and customer-centric online pharmacies by leveraging technology to improve healthcare accessibility and convenience. <br /> <br />
 
-                At <strong>MediTrust</strong>, your health and well-being are our top priorities. We strive to build lasting relationships with our customers through trust, transparency, and exceptional service. <br /> <br />
+                At <strong>MediStore</strong>, your health and well-being are our top priorities. We strive to build lasting relationships with our customers through trust, transparency, and exceptional service. <br /> <br />
 
-                <strong>MediTrust</strong> Caring for Your Health, Every Step of the Way.
+                <strong>MediStore</strong> Caring for Your Health, Every Step of the Way.
             </div>
         </div>
     );

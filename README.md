@@ -9,11 +9,11 @@ MediStore is a modern full-stack pharmacy management platform designed to simpli
 - Backend: https://medistore-server2.vercel.app  
 
 ### User Credentials
-Admin Email: karim@gmail.com
-Admin Password: 12345678
+Admin Email: karim@gmail.com <br/>
+Admin Password: 12345678 <br/>
 
-Seller Email: habib@gmail.com
-Seller Password: 12345678
+Seller Email: habib@gmail.com <br/>
+Seller Password: 12345678 <br/>
 
 ---
 

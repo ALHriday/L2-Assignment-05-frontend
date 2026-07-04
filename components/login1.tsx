@@ -57,12 +57,16 @@ const Login1 = ({
         password
       });
 
-      if (error || !data?.user) {
+      if (error) {
         return toast.error('Wrong Email or Password!');
       }
 
-      if (!data?.user?.emailVerified) {
+      if (data?.user && !data?.user?.emailVerified) {
         return toast.error('Email not verified! Please check your inbox.');
+      }
+
+      if (!data?.user) {
+        return toast.error('Wrong Email or Password!');
       }
 
       toast.success('Login Successful.');

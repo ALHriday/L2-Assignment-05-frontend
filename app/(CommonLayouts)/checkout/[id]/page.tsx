@@ -13,7 +13,9 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     if (!order) return null;
 
     return (
-        <PrintComponent order={order} />
+        <div>
+            <PrintComponent order={order} />
+        </div>
     );
 }
 export default page;

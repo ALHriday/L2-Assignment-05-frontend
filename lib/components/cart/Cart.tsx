@@ -13,13 +13,16 @@ type FormValues = {
     name: string
     phone: string
     shippingAddress: string
-    cashOnDelivery: boolean;
-}
+    cashOnDelivery?: boolean;
+    payWithCard?: boolean;
+};
 
 
 
 const Cart = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const [isPay, setIsPay] = useState(false);
+    const [isCOD, setIsCOD] = useState(false);
     const { cartItems, setCartItems } = useCart();
     const router = useRouter();
 
@@ -32,12 +35,13 @@ const Cart = () => {
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         setIsLoading(true);
-        const { name, phone, shippingAddress, cashOnDelivery } = data || {};
+        const { name, phone, shippingAddress, cashOnDelivery, payWithCard } = data || {};
 
         const userId = user?.id;
         const orderItems = cartItems?.map((item) => { return { medicineId: item.id, quantity: item.quantity } }) || [];
 
         const orderData = { name, phone, shippingAddress, cashOnDelivery, orderItems, userId };
+
 
         try {
             const res = await fetch(`/api/orders`, {
@@ -47,9 +51,19 @@ const Cart = () => {
             });
             if (!res.ok) { throw new Error('failed to placed order!') };
             const result = await res.json();
+
+            const orderId = result?.data?.id;
+
+            if (cashOnDelivery) {
+                router.push(`/checkout/${orderId}`);
+            }
+
+            if (payWithCard) {
+                router.push(`/payment/${orderId}`);
+            }
+
             setCartItems([]);
             reset();
-            router.push(`/checkout/${result?.data?.id}`);
         } catch (error) {
             return getErrorMessage(error);
         } finally {
@@ -102,9 +116,9 @@ const Cart = () => {
                 <div className="flex justify-between items-center gap-4 py-2 border-b-2 bg-orange-200 px-2">
                     <h1 className="font-bold text-xl md:text-2xl p-2">Your Cart Items</h1>
                     <div>
-                        {cartItems?.length ?
+                        {cartItems?.length &&
                             <Button className={`bg-red-500 cursor-pointer`} onClick={handleClearAll}>Clear All</Button>
-                            : ''}
+                        }
                     </div>
                 </div>
                 <table className="border-2">
@@ -172,10 +186,18 @@ const Cart = () => {
                                 <label className="flex flex-col gap-2 text-md font-bold ">Address:</label>
                                 <textarea className="p-2 text-md border min-h-16 max-h-30 rounded-md" {...register("shippingAddress", { required: true })} placeholder="Example: Village, P:O, P:S, District." required />
                             </div>
-                            <div className="flex gap-2 items-center">
-                                <input type="checkbox" className="p-2 text-xl font-bold border w-5 h-5 rounded-md" {...register("cashOnDelivery", { required: true })} required />
-                                <label className="flex flex-col gap-2 text-md font-bold">CashOnDelivery</label>
-                            </div>
+                            {!isPay &&
+                                <div className="flex gap-2 items-center">
+                                    <input onClick={() => setIsCOD(!isCOD)} type="checkbox" className="p-2 text-xl font-bold border w-5 h-5 rounded-md" {...register("cashOnDelivery")} />
+                                    <label className="flex flex-col gap-2 text-md font-bold">CashOnDelivery</label>
+                                </div>
+                            }
+                            {!isCOD &&
+                                <div className="flex gap-2 items-center">
+                                    <input onClick={() => setIsPay(!isPay)} type="checkbox" className="p-2 text-xl font-bold border w-5 h-5 rounded-md" {...register("payWithCard")} />
+                                    <label className="flex flex-col gap-2 text-md font-bold">PayWithCard</label>
+                                </div>
+                            }
                         </div>
                     </div>
 

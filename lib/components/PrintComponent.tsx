@@ -4,6 +4,8 @@ import { Item, Order } from "../types/types";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { MdArrowForwardIos } from "react-icons/md";
 
 const PrintComponent = ({ order }: { order: Order }) => {
     const contentRef = useRef<HTMLDivElement>(null);
@@ -11,28 +13,35 @@ const PrintComponent = ({ order }: { order: Order }) => {
 
     return (
         <div>
+            <div className="flex gap-2 p-4 bg-slate-100 font-semibold text-center justify-start items-center">
+                <Link href={`/`}>{`Home`}</Link>
+                <MdArrowForwardIos />
+                <Link href={`/medicines`}>{`Medicines`}</Link>
+            </div>
             <div ref={contentRef} className="p-4 md:p-8">
                 <div className="p-4 md:w-10/12 mx-auto border-2 my-6 rounded-md">
                     <div>
                         <h1 className="text-center text-2xl font-semibold mt-2">Invoice</h1>
                     </div>
                     <div className="flex flex-col gap-4 justify-center">
-                        <div className="flex justify-between gap-4 relative">
+                        <div className="flex flex-col justify-between gap-4 relative">
+                            <h1 className="font-semibold text-xl">MediStore</h1>
                             <Image
-                                className="absolute top-4 right-4"
+                                className="absolute top-0 right-4"
                                 src={`https://img.icons8.com/dusk/64/pills.png`}
                                 alt="mediStore-logo"
                                 width={60}
                                 height={60}
                             />
-
                         </div>
-                        <div className="flex flex-col gap-1 text-md">
+                        <div className="flex flex-col gap-1 text-sm">
                             <h1>Invoice_Id:{order?.id && ` INV-${order?.id.slice(-5).toUpperCase()}`}</h1>
                             <h1>Name: {order?.name.toUpperCase() || ''}</h1>
                             <h1>Phone: {order?.phone}</h1>
+                            <h1>Status: {order?.cashOnDelivery ? "UNPAID" : "PAID"}</h1>
+                            <h1>Payment Method: {order?.cashOnDelivery ? "COD" : "STRIPE"}</h1>
                             <h1>Address: {order?.shippingAddress}</h1>
-                            <h1>Created Date: {new Date(order?.createdAt).toLocaleDateString() || ''}</h1>
+                            <h1>Order Created: {new Date(order?.createdAt).toLocaleString() || ''}</h1>
                         </div>
 
                         <div>

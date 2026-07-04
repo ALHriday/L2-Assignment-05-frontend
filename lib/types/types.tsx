@@ -65,6 +65,7 @@ export interface Order {
     title: string;
     totalAmount: number;
     quantity: number;
+    cashOnDelivery: boolean;
     name: string;
     orderItems: Item[];
     phone: string;

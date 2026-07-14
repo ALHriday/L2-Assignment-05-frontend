@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Footer2 } from "@/components/footer2";
 import Providers from "./providers";
 import Navbar from "@/lib/components/navbar/Navbar";
+import ChatAssistant from "@/lib/components/chatAssistant/ChatAssistant";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -41,6 +42,9 @@ export default function RootLayout({
           </div>
           <div>
             <Footer2 />
+          </div>
+          <div>
+            <ChatAssistant />
           </div>
         </Providers>
       </body>
